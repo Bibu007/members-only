@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <%- include ('./partials/head.ejs') %>
+  <body>
+    <%- include ('./partials/header.ejs') %>
+    <div class="heading">
+        <h2>POSTS</h2>
+        <button class="create-post">+ Create Post</button>
+    </div>
+    <main>
+        <% if(posts.length > 0){ %>
+            <% console.log(posts) %>
+        <% posts.forEach(post =>  {%>
+          <div class="message">
+            <div class="info">
+          <h3><%= post.title %></h3>
+          <p><%= post.post%></p>
+          </div>
+          <div class="date">
+            <p><%= post.username%> | <%= post.created_at.toLocaleString("en-GB", {
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+  hour: "2-digit",
+  minute: "2-digit",
+  second: "2-digit",
+  hour12: false
+}); %></p>
+            
+          </div>
+        </div>
+        <%  }) %>
+        <% } %>
+        <dialog class="create-dialog">
+                <h3>Create post</h3>
+                <form action="/create" method="POST" class="dialog-form">
+                <label for="title">Title</label>
+                <input id="title" class="post-title" name="title" type="text" required>
+                <label for="content">Content: </label>
+                <textarea id="content" class="content" name="content" rows="5" placeholder="What's on your mind?" required></textarea>
+                <div class="dialog-btn-container">
+                <button class="dialog-btn">Submit</button>
+                <button type="button" class="cancel dialog-btn">Cancel</button>
+                </div>
+                </form>
+        </dialog>
+    </main>
+  </body>
+  <script>
+        const createBtn = document.querySelector('.create-post');
+        const dialog = document.querySelector('.create-dialog');
+        //console.log("Hey");
+        createBtn.addEventListener('click', (e) => {
+            
+                
+                dialog.showModal();
+                
+                
+        })
+        const cancel = document.querySelector('.cancel');
+
+                cancel.addEventListener('click', (e) => {
+                    dialog.close();
+                })
+            
+    </script>
+</html>
