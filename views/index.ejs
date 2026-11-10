@@ -10,11 +10,17 @@
         <% } %>
     </div>
     <main>
+        <div class="posts-container">
         <% if(posts.length > 0){ %>  
         <% posts.forEach(post =>  {%>
           <div class="message">
             <div class="info">
+                <div class="title-container">
           <h3><%= post.title %></h3>
+          <% if(user && user.admin) {%>
+          <button class="delete" data-doc="<%= post.id %>">Delete</button>
+          <% } %>
+          </div>
           <p><%= post.post%></p>
           </div>
           <% if(user && user.member) {%>
@@ -34,6 +40,7 @@
         </div>
         <%  }) %>
         <% } %>
+    </div>
         <dialog class="create-dialog">
                 <h3>Create post</h3>
                 <form action="/create" method="POST" class="dialog-form">
@@ -94,7 +101,13 @@
                 cancelJoin.addEventListener('click', (e) => {
                     joinDialog.close();
                 })
-
+                 
+        const deleteBtn = document.querySelector('.posts-container');
+        deleteBtn.addEventListener('click', (e) => {
+            const endpoint = `/delete/${e.target.dataset.doc}`;
+            console.log(`Endpoint: ${endpoint}`)
+            window.location.href = `${endpoint}`;
+        })
        
     </script>
 </html>
