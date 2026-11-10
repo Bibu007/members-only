@@ -7,6 +7,7 @@ const bcrypt = require("bcryptjs");
 const userController = require("../controllers/userController");
 const isAuth = require("./authMiddleware").isAuth;
 const isAdmin = require("./authMiddleware").isAdmin;
+const isMember = require("./authMiddleware").isMember;
 
 /**
  * -------------- POST ROUTES ----------------
@@ -15,7 +16,7 @@ const isAdmin = require("./authMiddleware").isAdmin;
 router.get("/", userController.postsListGet);
 
 router.get("/sign-up", (req, res, next) => {
-  res.render("sign-up");
+  res.render("sign-up", { success: false, fail: false, user: req.user });
 });
 
 /*
@@ -50,11 +51,19 @@ router.post("/sign-up", async (req, res, next) => {
 router.post("/sign-up", userController.addUser);
 
 router.get("/login", (req, res, next) => {
-  res.render("login");
+  res.render("login", { user: req.user });
 });
 
-router.get("login-failed", (req, res, next) => {
-  res.send("Login failed");
+router.get("/login-failed", (req, res, next) => {
+  res.render("login-failed");
+});
+
+router.get("/member-success", isMember, async (req, res) => {
+  res.render("member-success");
+});
+
+router.get("/member-fail", isAuth, async (req, res) => {
+  res.render("member-fail");
 });
 
 router.post(
@@ -77,6 +86,21 @@ router.post("/create", isAuth, async (req, res, next) => {
     ])
     .then((result) => res.redirect("/"))
     .catch((err) => console.log(err));
+});
+
+router.post("/join", isAuth, async (req, res, next) => {
+  const secret = req.body.secret;
+  const username = req.user.username;
+
+  if (secret === "Nangashahrukh") {
+    pool
+      .query(`UPDATE users SET member=TRUE WHERE username = $1;`, [username])
+      .then((result) => res.redirect("/member-success"))
+      .catch((err) => console.log(err));
+  } else {
+    //alert("Wrong password");
+    res.redirect("/member-fail");
+  }
 });
 
 router.get("/logout", (req, res, next) => {

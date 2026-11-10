@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <%- include ('./partials/head.ejs') %>
+  <body>
+    <%- include ('./partials/login-header.ejs') %>
+    <div class="login-container">
+      <h1 class="login-header">Login</h1>
+      <form action="/log-in" method="POST" class="login-form">
+        <label for="username">Username</label>
+        <input
+          id="username"
+          name="username"
+          placeholder="username"
+          type="text"
+        />
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" />
+        <button type="submit" class="dialog-btn">Log In</button>
+        <div class="failed">Incorrect username or password</div>
+      </form>
+    </div>
+  </body>
+</html>

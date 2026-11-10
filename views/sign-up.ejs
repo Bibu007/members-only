@@ -6,7 +6,7 @@
     <%- include ('./partials/head.ejs') %>
   </head>
   <body>
-    <%- include ('./partials/header.ejs') %>
+    <%- include ('./partials/signUp-header.ejs') %>
     <div class="login-container">
       <h1>Sign Up</h1>
       <form action="/sign-up" method="POST">
@@ -22,8 +22,27 @@
         <input id="password" name="password" type="password" required />
         <label for="confirm">Confirm password</label>
         <input id="confirm" name="confirm" type="password" required />
+        <div class="checkbox-container">
+          <input
+            type="checkbox"
+            id="admin"
+            name="admin"
+            value="yes"
+            class="checkbox"
+          />
+          <label for="admin">Admin</label><br />
+        </div>
         <button type="submit" class="dialog-btn">Sign Up</button>
         <%- include("partials/errors.ejs") %>
+        <% if(success) { %>
+        <div class="success">
+          You have been successfully registered <a href="/login">Login</a>
+        </div>
+        <% } else if(fail) { %>
+          <div class="failed">
+          Could not register user. Try again.
+        </div>
+         <% } %>
       </form>
     </div>
   </body>

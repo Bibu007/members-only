@@ -52,14 +52,21 @@ exports.addUser = [
         return res.status(409).send("Passwords do no match");
       }
 
+      let admin = false;
+
+      if (req.body.admin) {
+        admin = true;
+      }
+
       const hashedPassword = await bcrypt.hash(req.body.password, 10);
       await pool.query(
-        "INSERT INTO users (username, password) VALUES ($1, $2)",
-        [req.body.username, hashedPassword],
+        "INSERT INTO users (username, password, admin) VALUES ($1, $2, $3)",
+        [req.body.username, hashedPassword, admin],
       );
-      res.redirect("/");
+      res.render("sign-up", { success: true, fail: false });
     } catch (error) {
       console.error(error);
+      res.render("sign-up", { success: false, fail: true });
       next(error);
     }
   },

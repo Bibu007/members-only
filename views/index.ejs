@@ -5,17 +5,19 @@
     <%- include ('./partials/header.ejs') %>
     <div class="heading">
         <h2>POSTS</h2>
+        <% if(user) { %>
         <button class="create-post">+ Create Post</button>
+        <% } %>
     </div>
     <main>
-        <% if(posts.length > 0){ %>
-            <% console.log(posts) %>
+        <% if(posts.length > 0){ %>  
         <% posts.forEach(post =>  {%>
           <div class="message">
             <div class="info">
           <h3><%= post.title %></h3>
           <p><%= post.post%></p>
           </div>
+          <% if(user && user.member) {%>
           <div class="date">
             <p><%= post.username%> | <%= post.created_at.toLocaleString("en-GB", {
   year: "numeric",
@@ -28,6 +30,7 @@
 }); %></p>
             
           </div>
+          <% } %>
         </div>
         <%  }) %>
         <% } %>
@@ -44,6 +47,19 @@
                 </div>
                 </form>
         </dialog>
+
+          <dialog class="join-dialog">
+            <form action="/join" method="POST" class="dialog-form">
+                <h3>Join the exclusive club</h3>
+                <p> Want to know who posted what and when? Enter the secret key to join the club:</p>
+                <input id="secret" class="secret" name="secret" type="password" required>
+                <div class="dialog-btn-container">
+                <button class="dialog-btn" >Join</button>
+                <button type="button" class="cancel-join dialog-btn">Cancel</button>
+                </div>
+            </form>
+        </dialog>
+        
     </main>
   </body>
   <script>
@@ -62,6 +78,23 @@
                 cancel.addEventListener('click', (e) => {
                     dialog.close();
                 })
+        
+        const joinBtn = document.querySelector('.member');
+        const joinDialog = document.querySelector('.join-dialog');
+        //console.log("Hey");
+        joinBtn.addEventListener('click', (e) => {
             
+                
+                joinDialog.showModal();
+                
+                
+        })
+        const cancelJoin = document.querySelector('.cancel-join');
+
+                cancelJoin.addEventListener('click', (e) => {
+                    joinDialog.close();
+                })
+
+       
     </script>
 </html>

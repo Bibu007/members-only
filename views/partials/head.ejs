@@ -122,14 +122,17 @@
       color: white;
       background-color: #ff4500;
       font-weight: 800;
-      border: none;
+      border-radius: 10px;
+      padding: 5px;
     }
     .dialog-btn:active {
       transform: translateY(2px);
     }
     .dialog-btn-container {
       display: flex;
-      justify-content: space-around;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
     }
     textarea {
       border-radius: 10px;
@@ -152,6 +155,82 @@
       display: grid;
       margin: auto;
       place-content: center;
+    }
+    .checkbox-container {
+      display: flex;
+      justify-content: flex-start;
+      width: 10px;
+    }
+    .checkbox {
+      min-width: 20px;
+    }
+    .success {
+      text-align: center;
+      color: rgb(38, 134, 38);
+      font-weight: 800;
+    }
+    .user-icon {
+      width: 30px;
+    }
+    .failed {
+      text-align: center;
+      color: red;
+      font-weight: 800;
+    }
+    .username {
+      color: maroon;
+      font-weight: 700;
+    }
+    .user-container {
+      display: flex;
+      gap: 5px;
+    }
+    .instagram-gradient {
+      background: linear-gradient(
+        45deg,
+        #f09433,
+        #e6683c,
+        #dc2743,
+        #cc2366,
+        #bc1888
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+      padding-right: 10px;
+      font-size: 1.3rem;
+      border: none;
+      font-weight: 900;
+    }
+    .logout {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .join-dialog {
+      gap: 20px;
+    }
+    .congo {
+      background: linear-gradient(
+        45deg,
+        #f09433,
+        #e6683c,
+        #dc2743,
+        #cc2366,
+        #bc1888
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .congo-container {
+      display: flex;
+      width: 100vw;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    .no-congo {
+      color: red;
     }
   </style>
 </head>
