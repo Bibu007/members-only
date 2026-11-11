@@ -113,7 +113,7 @@ router.get("/logout", (req, res, next) => {
   });
 });
 
-router.get("/delete/:id", async (req, res) => {
+router.get("/delete/:id", isAdmin, async (req, res) => {
   pool
     .query(`DELETE FROM posts WHERE id = $1;`, [req.params.id])
     .then((result) => res.redirect("/"))
