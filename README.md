@@ -1,4 +1,4 @@
-# 🔐 Members Only
+# Members Only
 
 <p align="center">
   <a href="https://members-only-tklm.onrender.com/">
