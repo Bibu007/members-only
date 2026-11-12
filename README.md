@@ -14,7 +14,7 @@ Visitors can read posts without knowing who wrote them, while logged-in members 
 These are the different access levels:
 1. Visitor: Can see the posts but cannot create post.
 2. Logged-in user: Visitor access + ability to create posts.
-3. Members: Logged-in user access + can see the the author of the post and the time post creation.
+3. Members: Logged-in user access + can see the the author of the post and the timestamp of post creation.
 4. Admin: Member access + can delete any post
 
 Built as part of [The Odin Project](https://www.theodinproject.com/), this project focuses on implementing authentication, authorization, session management, and database-driven web applications using Node.js and Express.
